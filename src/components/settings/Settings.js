@@ -54,6 +54,26 @@ class Settings extends Component {
                   onChange={this.allowRegistrationChange}
                 />
               </div>
+
+              <div className="form-group">
+                <label>Disable Balance On Add</label>{' '}
+                <input
+                  type="checkbox"
+                  name="disableBalanceOnAdd"
+                  checked={!!disableBalanceOnAdd}
+                  onChange={this.disableBalanceOnAddChange}
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Disable Balance On Edit</label>{' '}
+                <input
+                  type="checkbox"
+                  name="disableBalanceOnEdit"
+                  checked={!!disableBalanceOnEdit}
+                  onChange={this.disableBalanceOnEditChange}
+                />
+              </div>
             </form>
           </div>
         </div>
@@ -62,6 +82,12 @@ class Settings extends Component {
   }
 }
 
+Settings.propTypes = {
+  settings: PropTypes.object.isRequired,
+  setDisableBalanceOnAdd: PropTypes.func.isRequired,
+  setDisableBalanceOnEdit: PropTypes.func.isRequired,
+  setAllowRegistration: PropTypes.func.isRequired
+};
 
 export default connect(
   (state, props) => ({

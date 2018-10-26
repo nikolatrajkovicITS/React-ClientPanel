@@ -1,8 +1,8 @@
-import React from "react";
-import Clients from "../clients/Clients";
-import Sidebar from "../layout/Sidebar";
+import React from 'react';
+import Clients from '../clients/Clients';
+import Sidebar from '../layout/Sidebar';
 
-const Dashboard = () => {
+export default () => {
   return (
     <div className="row">
       <div className="col-md-10">
@@ -14,5 +14,3 @@ const Dashboard = () => {
     </div>
   );
 };
-
-export default Dashboard;
