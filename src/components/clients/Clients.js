@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
-import { compose } from "redux";
-import { connect } from "react-redux";
-import { firestoreConnect } from "react-redux-firebase";
-import { Sipnner } from "../layout/Spinner";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { firestoreConnect } from 'react-redux-firebase';
+import Spinner from '../layout/Spinner';
 
 class Clients extends Component {
   state = {
@@ -17,11 +17,13 @@ class Clients extends Component {
     if (clients) {
       // Add balances
       const total = clients.reduce((total, client) => {
-        return total + pareseFloat(client.balance.toString());
+        return total + parseFloat(client.balance.toString());
       }, 0);
 
       return { totalOwed: total };
     }
+
+    return null;
   }
 
   render() {
@@ -34,14 +36,15 @@ class Clients extends Component {
           <div className="row">
             <div className="col-md-6">
               <h2>
-                <i className="fas fa-users" /> Clients
+                {' '}
+                <i className="fas fa-users" /> Clients{' '}
               </h2>
             </div>
             <div className="col-md-6">
               <h5 className="text-right text-secondary">
-                Total Owed
+                Total Owed{' '}
                 <span className="text-primary">
-                  ${parseFloat(totalOwed).toFixed()}
+                  ${parseFloat(totalOwed).toFixed(2)}
                 </span>
               </h5>
             </div>
@@ -69,8 +72,7 @@ class Clients extends Component {
                       to={`/client/${client.id}`}
                       className="btn btn-secondary btn-sm"
                     >
-                      <i className="fas fa-arrow-circle-right" />
-                      Details
+                      <i className="fas fa-arrow-circle-right" /> Details
                     </Link>
                   </td>
                 </tr>
@@ -80,7 +82,7 @@ class Clients extends Component {
         </div>
       );
     } else {
-      return <Sipnner />;
+      return <Spinner />;
     }
   }
 }
@@ -91,7 +93,7 @@ Clients.propTypes = {
 };
 
 export default compose(
-  firestoreConnect([{ collection: "clients" }]),
+  firestoreConnect([{ collection: 'clients' }]),
   connect((state, props) => ({
     clients: state.firestore.ordered.clients
   }))
